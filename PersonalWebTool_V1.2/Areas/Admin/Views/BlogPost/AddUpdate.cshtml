@@ -1,0 +1,34 @@
+﻿@model BlogPost
+@{ 
+    string title = ViewBag.Action + "Blog Post";
+    ViewBag.Title = title;
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form asp-controller="BlogPost" asp-action="Update" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="BlogPostID" />
+    <div class="form-group">
+        <label asp-for="DateCreated">Date:</label>
+        <input asp-for="DateCreated" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageName">Image name</label>
+        <input asp-for="ImageName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Body">Post Content</label>
+        <input asp-for="Body" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Category">Category</label>
+        <select asp-for="PostCategoryID" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "PostCategoryID", "Name", Model.PostCategoryID.ToString()));"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
+    <a asp-controller="BlogPost" asp-action="List" class="btn btn-primary">Cancel</a>
+</form>

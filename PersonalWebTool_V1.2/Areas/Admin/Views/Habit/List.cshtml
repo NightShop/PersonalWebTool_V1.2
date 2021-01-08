@@ -1,0 +1,32 @@
+﻿@model List<Habit>
+@(ViewBag.Title = "Category Manager");
+
+<h1>@ViewBag.Title</h1>
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Points</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Habit habit in Model)
+            {
+                <tr>
+                    <td>@habit.Name</td>
+                    <td>@habit.Points</td>
+                    <td>
+                        <a asp-controller="Habit" asp-action="Update" asp-route-id="@habit.HabitID">Update</a>
+                    </td>
+                    <td>
+                        <a asp-controller="Habit" asp-action="Delete" asp-route-id="@habit.HabitID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Habit" asp-action="Add" class="btn btn-primary">Add New Habit</a>
+</div>

@@ -1,0 +1,22 @@
+﻿@model Habit
+
+@{
+    string title = ViewBag.Action + " habit";
+    ViewBag.Title = title;
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form method="post" asp-area="Admin" asp-controller="Habit" asp-action="Update">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name">Habit:</label>
+        <input asp-for="Name" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Points">Points:</label>
+        <input asp-for="Points" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
+    <a asp-controller="Habit" asp-action="List" class="btn btn-primary">Cancel</a>
+</form>
