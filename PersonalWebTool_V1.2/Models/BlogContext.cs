@@ -20,6 +20,7 @@ namespace PersonalWebTool_V1.Models
         public DbSet<GratefulnessUnit> GratefulnessUnits { get; set; }
         public DbSet<Habit> Habits { get; set; }
         public DbSet<HabitDay> HabitDays {get;set;}
+        public DbSet<HabitQuantity> HabitQuantities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,6 +71,8 @@ namespace PersonalWebTool_V1.Models
                 {
                     GratefulnessEntryID = 1
                 });
+
+            
 
 
         }

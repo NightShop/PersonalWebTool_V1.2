@@ -9,6 +9,6 @@ namespace PersonalWebTool_V1.Models
     {
         public int HabitID { get; set; }
         public string Name { get; set; }
-        public int? Points { get; set; }
+        public int Points { get; set; }
     }
 }

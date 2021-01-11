@@ -1,30 +1,38 @@
-﻿@model List<HabitDay>
+﻿@model HabitViewModel
 @(ViewBag.Title = "HabitDAYZ");
 
 <h1>@ViewBag.Title</h1>
-@*<div>
+<div>
+    <a asp-controller="HabitDay" asp-action="MakeNew">Make new habit day</a>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th></th>
-                <th></th>
+                <th>Date</th>
+                @foreach (Habit habit in Model.Habits)
+                {
+                    <th>@habit.Name (@habit.Points pts.)</th>
+                }
+                <th>Summary for day</th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (PostCategory category in Model)
+            @foreach (HabitDay habitDay in Model.HabitDays)
             {
+                int sumOfPoints = 0;
                 <tr>
-                    <td>@category.Name</td>
-                    <td>
-                        <a asp-controller="Category" asp-action="Update" asp-route-id="@category.PostCategoryID">Update</a>
-                    </td>
-                    <td>
-                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.PostCategoryID">Delete</a>
-                    </td>
+                    <td>@habitDay.DateCreated</td>
+                    @foreach (HabitQuantity quantity in Model.HabitQuantities.Where(q => q.HabitDay == habitDay))
+                    {
+                        sumOfPoints += quantity.Counter * quantity.Habit.Points;
+                        string id = quantity.Habit.HabitID + "-" + habitDay.HabitDayID;
+                        <td>@quantity.Counter <a asp-controller="HabitDay" asp-action="AddPoint" asp-route-id="@id">Add count</a></td>
+                    }
+                    <td>@sumOfPoints Points</td>
+
                 </tr>
             }
         </tbody>
     </table>
     <a asp-controller="Category" asp-action="Add" class="btn btn-primary">Add New Category</a>
-</div>*@
+</div>

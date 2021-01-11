@@ -48,6 +48,18 @@ namespace PersonalWebTool_V1.Areas.Admin.Controllers
                 if(habit.HabitID == 0)
                 {
                     context.Habits.Add(habit);
+                    context.SaveChanges();
+                    foreach(HabitDay habitDay in context.HabitDays)
+                    {
+                        //habitDay.HabitQuantities = context.HabitDays.Find(habitDay.HabitDayID).HabitQuantities;
+                        HabitQuantity habitQuantity = new HabitQuantity();
+                        habitQuantity.Habit = habit;
+                        habitQuantity.HabitDay = habitDay;
+                        habitQuantity.Counter = 0;
+                        habitQuantity.HabitQuantityID = habit.HabitID + "-" + habitDay.HabitDayID;
+                        context.Add(habitQuantity);
+                        habitDay.HabitQuantities.Add(habitQuantity);
+                    }
                 }
                 else
                 {
