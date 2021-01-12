@@ -29,6 +29,7 @@ namespace PersonalWebTool_V1
             services.AddDbContext<BlogContext>(
                 options => options.UseSqlServer(
                     Configuration.GetConnectionString("BlogContext")));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
