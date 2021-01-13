@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalWebTool_V1.Models;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace PersonalWebTool_V1.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;

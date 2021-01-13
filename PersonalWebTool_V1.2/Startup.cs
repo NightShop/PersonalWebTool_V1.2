@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,18 +25,27 @@ namespace PersonalWebTool_V1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+                options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/auth/login");
+                options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/auth/denied");
+            });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<BlogContext>(
                 options => options.UseSqlServer(
                     Configuration.GetConnectionString("BlogContext")));
-            
+
+           
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-                app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
             
            
 
@@ -43,8 +53,8 @@ namespace PersonalWebTool_V1
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {
