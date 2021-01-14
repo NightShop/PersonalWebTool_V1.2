@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace PersonalWebTool_V1.Models
 {
-    public class ImageViewModel
+    public class BlogPostCreateViewModel
     {
         public int BlogID { get; set; }
         public IFormFile Image { get; set; }
+
+        public BlogPost blogPost { get; set; }
+
     }
 }

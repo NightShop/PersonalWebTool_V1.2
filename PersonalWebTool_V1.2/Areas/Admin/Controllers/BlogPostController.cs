@@ -59,34 +59,79 @@ namespace PersonalWebTool_V1.Areas.Admin.Controllers
         {
             BlogPost post = new BlogPost();
             post.Category = context.Categories.Find(1);
-
+            BlogPostCreateViewModel model = new BlogPostCreateViewModel();
+            model.blogPost = post;
             ViewBag.Action = "Add";
             ViewBag.Categories = categories;
-            return View("AddUpdate", post);
+            return View("AddUpdate", model);
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
+            BlogPostCreateViewModel model = new BlogPostCreateViewModel();
             BlogPost blogPost = context.BlogPosts.Include(p => p.Category).FirstOrDefault(b => b.BlogPostID == id);
-
+            model.blogPost = blogPost;
             ViewBag.Action = "Update";
             ViewBag.Categories = categories;
-            return View("AddUpdate", blogPost);
+            return View("AddUpdate", model);
         }
 
         [HttpPost]
-        public IActionResult Update(BlogPost blogPost)
+        public IActionResult Update(BlogPostCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (blogPost.BlogPostID == 0)
+                if (model.blogPost.BlogPostID == 0)
                 {
-                    context.BlogPosts.Add(blogPost);
+
+
+                    //adding picture
+
+                    string uniqueFileName = null;
+                    if (model.Image != null)
+                    {
+                        string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath + "\\img\\");
+
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        FileStream fileStream = new FileStream(filePath, FileMode.Create);
+                        model.Image.CopyTo(fileStream);
+                        fileStream.Close();
+                        model.blogPost.ImageUrl = "\\img\\" + uniqueFileName;
+                        string[] imageNameArray = uniqueFileName.Split("_");
+                        string imageName = imageNameArray[imageNameArray.Length - 1];
+                        model.blogPost.ImageName = imageName;
+                    }
+
+                    context.BlogPosts.Add(model.blogPost);
                 }
                 else
                 {
-                    context.BlogPosts.Update(blogPost);
+                    //updating picture
+                    string uniqueFileName = null;
+                    string pathOldImage = null;
+                    if (model.Image != null)
+                    {
+                        string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath + "\\img\\");
+                        string oldImageName = Path.GetFileName(model.blogPost.ImageUrl);
+                        //Delete previous picture
+                        if (oldImageName != null)
+                        {
+                            pathOldImage = Path.Combine(uploadsFolder, oldImageName);
+                            System.IO.File.Delete(pathOldImage);
+                        }
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        FileStream fileStream = new FileStream(filePath, FileMode.Create);
+                        model.Image.CopyTo(fileStream);
+                        fileStream.Close();
+                        model.blogPost.ImageUrl = "\\img\\" + uniqueFileName;
+                        string[] imageNameArray = uniqueFileName.Split("_");
+                        string imageName = imageNameArray[imageNameArray.Length - 1];
+                        model.blogPost.ImageName = imageName;
+                    }
+                    context.BlogPosts.Update(model.blogPost);
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -95,7 +140,7 @@ namespace PersonalWebTool_V1.Areas.Admin.Controllers
             {
                 ViewBag.Action = "Save";
                 ViewBag.Categories = categories;
-                return View("AddUpdate", blogPost);
+                return View("AddUpdate", model);
             }
         }
 
@@ -116,13 +161,13 @@ namespace PersonalWebTool_V1.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddImageWindow(int id)
         {
-            ImageViewModel model = new ImageViewModel();
+            BlogPostCreateViewModel model = new BlogPostCreateViewModel();
             model.BlogID = id;
             return View("AddImage", model);
         }
 
         [HttpPost]
-        public IActionResult AddImage(ImageViewModel model)
+        public IActionResult AddImage(BlogPostCreateViewModel model)
         {
             string uniqueFileName = null;
             string pathOldImage = null;
@@ -150,5 +195,5 @@ namespace PersonalWebTool_V1.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
     }
-        
+
 }

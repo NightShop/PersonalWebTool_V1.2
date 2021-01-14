@@ -1,4 +1,4 @@
-﻿@model BlogPost
+﻿@model BlogPostCreateViewModel
 @{
     string title = ViewBag.Action + "Blog Post";
     ViewBag.Title = title;
@@ -6,29 +6,44 @@
 
 <h1>@ViewBag.Title</h1>
 
-<form asp-controller="BlogPost" asp-action="Update" method="post">
+<form enctype="multipart/form-data" asp-controller="BlogPost" asp-action="Update" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
-    <input type="hidden" asp-for="BlogPostID" />
+    <input type="hidden" asp-for="blogPost.BlogPostID" />
+    <input type="hidden" asp-for="blogPost.ImageUrl" />
+    <input type="hidden" asp-for="blogPost.ImageName" />
     <div class="form-group">
-        <label asp-for="DateCreated">Date:</label>
-        <input asp-for="DateCreated" />zz
+        <label asp-for="blogPost.DateCreated">Date:</label>
+        <input asp-for="blogPost.DateCreated" />zz
     </div>
     <div class="form-group">
-        <label asp-for="ImageName">Image name</label>
-        <input asp-for="ImageName" />
+        <label asp-for="Image"></label>
+        <div class="custom-file">
+            <input asp-for="Image" class="form-control custom-file-input" />
+            <label class="custom-file-label">Choose File...</label>
+        </div>
     </div>
     <div class="form-group">
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" />
+        <label asp-for="blogPost.Title">Title</label>
+        <input asp-for="blogPost.Title" />
     </div>
     <div class="form-group">
-        <label asp-for="Body">Post Content</label>
-        <input asp-for="Body" />
+        <label asp-for="blogPost.Body">Post Content</label>
+        <input asp-for="blogPost.Body" />
     </div>
     <div class="form-group">
-        <label asp-for="Category">Category</label>
-        <select asp-for="PostCategoryID" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "PostCategoryID", "Name", Model.PostCategoryID.ToString()));"></select>
+        <label asp-for="blogPost.Category">Category</label>
+        <select asp-for="blogPost.PostCategoryID" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "PostCategoryID", "Name", Model.blogPost.PostCategoryID.ToString()));"></select>
     </div>
     <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
     <a asp-controller="BlogPost" asp-action="List" class="btn btn-primary">Cancel</a>
 </form>
+@section Scripts {
+    <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+    </script>
+}
