@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PersonalWebTool_V1._2.Areas.Admin.Controllers
+namespace PersonalWebTool_V1.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomeController : Controller
+    public class HomeController : AdminController
     {
         public IActionResult Index()
         {

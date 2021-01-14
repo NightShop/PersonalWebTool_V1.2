@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PersonalWebTool_V1.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HabitDayController : Controller
+    public class HabitDayController : AdminController
     {
         private BlogContext context;
         public HabitDayController(BlogContext ctx)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PersonalWebTool_V1.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class GratefulnessController : Controller
+    public class GratefulnessController : AdminController
     {
         private BlogContext context;
         public GratefulnessController(BlogContext ctx)

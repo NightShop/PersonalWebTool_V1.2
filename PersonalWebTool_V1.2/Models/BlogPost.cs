@@ -16,7 +16,7 @@ namespace PersonalWebTool_V1.Models
         [Required(ErrorMessage ="You can not create blog post without body")]
         public string Body { get; set; }
         public string ImageName { get; set; }
-        public string ImageUrl => ImageName != null ? "/img/" + ImageName + ".jpg" : "";
+        public string ImageUrl { get; set; }
         [Required(ErrorMessage = "Please select category")]
         public int PostCategoryID { get; set; }
         public PostCategory Category { get; set; }

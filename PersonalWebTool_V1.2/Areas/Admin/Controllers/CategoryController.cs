@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PersonalWebTool_V1._2.Areas.Admin.Controllers
+namespace PersonalWebTool_V1.Areas.Admin.Controllers
 {
 
     [Area("Admin")]
 
-    public class CategoryController : Controller
+    public class CategoryController : AdminController
     {
         private BlogContext context;
         public CategoryController(BlogContext ctx)

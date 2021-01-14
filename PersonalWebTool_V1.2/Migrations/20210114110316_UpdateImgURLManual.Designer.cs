@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalWebTool_V1.Models;
 
 namespace PersonalWebTool_V1.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20210114110316_UpdateImgURLManual")]
+    partial class UpdateImgURLManual
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace PersonalWebTool_V1.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("ImageUrlManual")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PostCategoryID")
@@ -51,35 +53,6 @@ namespace PersonalWebTool_V1.Migrations
                     b.HasIndex("PostCategoryID");
 
                     b.ToTable("BlogPosts");
-
-                    b.HasData(
-                        new
-                        {
-                            BlogPostID = 1,
-                            Body = "This first blog post in my Personal Web Tool. This first blog post in my Personal Web Tool. This first blog post in my Personal Web Tool. This first blog post in my Personal Web Tool. ",
-                            DateCreated = new DateTime(2021, 1, 14, 12, 10, 17, 314, DateTimeKind.Local).AddTicks(9393),
-                            ImageName = "open-sign",
-                            PostCategoryID = 4,
-                            Title = "Initialize Personal Web Tool"
-                        },
-                        new
-                        {
-                            BlogPostID = 2,
-                            Body = "iiiiiiiiiiiiiiiiiLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            DateCreated = new DateTime(2021, 1, 14, 12, 10, 17, 318, DateTimeKind.Local).AddTicks(611),
-                            ImageName = "vzhodne-alpe",
-                            PostCategoryID = 1,
-                            Title = "Initialize Personal Web Tool"
-                        },
-                        new
-                        {
-                            BlogPostID = 5,
-                            Body = "iiiiiiiiiiiiiiiiiLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            DateCreated = new DateTime(2021, 1, 14, 12, 10, 17, 318, DateTimeKind.Local).AddTicks(707),
-                            ImageName = "vzhodne-alpe",
-                            PostCategoryID = 1,
-                            Title = "AnotherTest"
-                        });
                 });
 
             modelBuilder.Entity("PersonalWebTool_V1.Models.GratefulnessEntry", b =>
@@ -95,13 +68,6 @@ namespace PersonalWebTool_V1.Migrations
                     b.HasKey("GratefulnessEntryID");
 
                     b.ToTable("GratefulnessEntries");
-
-                    b.HasData(
-                        new
-                        {
-                            GratefulnessEntryID = 1,
-                            DateCreated = new DateTime(2021, 1, 14, 12, 10, 17, 318, DateTimeKind.Local).AddTicks(4767)
-                        });
                 });
 
             modelBuilder.Entity("PersonalWebTool_V1.Models.GratefulnessUnit", b =>
@@ -125,15 +91,6 @@ namespace PersonalWebTool_V1.Migrations
                     b.HasIndex("GratefulnessEntryID");
 
                     b.ToTable("GratefulnessUnits");
-
-                    b.HasData(
-                        new
-                        {
-                            GratefulnessUnitID = 1,
-                            Details = "Test1",
-                            GratefulnessEntryID = 1,
-                            Main = "test1"
-                        });
                 });
 
             modelBuilder.Entity("PersonalWebTool_V1.Models.Habit", b =>
@@ -209,28 +166,6 @@ namespace PersonalWebTool_V1.Migrations
                     b.HasKey("PostCategoryID");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            PostCategoryID = 1,
-                            Name = "Adventure"
-                        },
-                        new
-                        {
-                            PostCategoryID = 2,
-                            Name = "Optimization"
-                        },
-                        new
-                        {
-                            PostCategoryID = 3,
-                            Name = "Programming"
-                        },
-                        new
-                        {
-                            PostCategoryID = 4,
-                            Name = "Miscellaneous"
-                        });
                 });
 
             modelBuilder.Entity("PersonalWebTool_V1.Models.BlogPost", b =>

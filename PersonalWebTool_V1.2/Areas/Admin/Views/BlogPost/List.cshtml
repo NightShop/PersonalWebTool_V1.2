@@ -31,6 +31,7 @@
                     <h5>@post.DateCreated</h5>
                     <article style="font-size:20px;overflow:hidden;height:79%"><p>@post.Body</p></article>
                     <a class="float-right" asp-controller="BlogPost" asp-action="Update" asp-route-ID="@post.BlogPostID">Read More</a>
+                    <a asp-controller="BlogPost" asp-action="AddImageWindow" asp-route-ID="@post.BlogPostID" class="btn btn-primary">Add Image</a>
                 </div>
             </div>
         }
