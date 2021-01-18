@@ -1,6 +1,8 @@
 ﻿@model List<PostCategory>
 
-@(ViewBag.Title = "Category Manager");
+@{
+    ViewBag.Title = "Category Manager";
+}
 
 <h1>@ViewBag.Title</h1>
 <div>
@@ -28,4 +30,5 @@
         </tbody>
     </table>
     <a asp-controller="Category" asp-action="Add" class="btn btn-primary">Add New Category</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Go Back</a>
 </div>

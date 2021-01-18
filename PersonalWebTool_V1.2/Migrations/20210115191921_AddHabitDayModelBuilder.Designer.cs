@@ -10,8 +10,8 @@ using PersonalWebTool_V1.Models;
 namespace PersonalWebTool_V1.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20210107103230_AddedDBSetGratuflness")]
-    partial class AddedDBSetGratuflness
+    [Migration("20210115191921_AddHabitDayModelBuilder")]
+    partial class AddHabitDayModelBuilder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,9 @@ namespace PersonalWebTool_V1.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PostCategoryID")
                         .HasColumnType("int");
 
@@ -56,7 +59,7 @@ namespace PersonalWebTool_V1.Migrations
                         {
                             BlogPostID = 1,
                             Body = "This first blog post in my Personal Web Tool. This first blog post in my Personal Web Tool. This first blog post in my Personal Web Tool. This first blog post in my Personal Web Tool. ",
-                            DateCreated = new DateTime(2021, 1, 7, 11, 32, 29, 665, DateTimeKind.Local).AddTicks(516),
+                            DateCreated = new DateTime(2021, 1, 15, 20, 19, 20, 597, DateTimeKind.Local).AddTicks(8819),
                             ImageName = "open-sign",
                             PostCategoryID = 4,
                             Title = "Initialize Personal Web Tool"
@@ -64,11 +67,20 @@ namespace PersonalWebTool_V1.Migrations
                         new
                         {
                             BlogPostID = 2,
-                            Body = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            DateCreated = new DateTime(2021, 1, 7, 11, 32, 29, 670, DateTimeKind.Local).AddTicks(311),
+                            Body = "iiiiiiiiiiiiiiiiiLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                            DateCreated = new DateTime(2021, 1, 15, 20, 19, 20, 600, DateTimeKind.Local).AddTicks(5603),
                             ImageName = "vzhodne-alpe",
                             PostCategoryID = 1,
                             Title = "Initialize Personal Web Tool"
+                        },
+                        new
+                        {
+                            BlogPostID = 5,
+                            Body = "iiiiiiiiiiiiiiiiiLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                            DateCreated = new DateTime(2021, 1, 15, 20, 19, 20, 600, DateTimeKind.Local).AddTicks(5685),
+                            ImageName = "vzhodne-alpe",
+                            PostCategoryID = 1,
+                            Title = "AnotherTest"
                         });
                 });
 
@@ -90,7 +102,7 @@ namespace PersonalWebTool_V1.Migrations
                         new
                         {
                             GratefulnessEntryID = 1,
-                            DateCreated = new DateTime(2021, 1, 7, 11, 32, 29, 670, DateTimeKind.Local).AddTicks(8208)
+                            DateCreated = new DateTime(2021, 1, 15, 20, 19, 20, 600, DateTimeKind.Local).AddTicks(8276)
                         });
                 });
 
@@ -124,6 +136,72 @@ namespace PersonalWebTool_V1.Migrations
                             GratefulnessEntryID = 1,
                             Main = "test1"
                         });
+                });
+
+            modelBuilder.Entity("PersonalWebTool_V1.Models.Habit", b =>
+                {
+                    b.Property<int>("HabitID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.HasKey("HabitID");
+
+                    b.ToTable("Habits");
+                });
+
+            modelBuilder.Entity("PersonalWebTool_V1.Models.HabitDay", b =>
+                {
+                    b.Property<int>("HabitDayID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Points")
+                        .HasColumnType("int");
+
+                    b.HasKey("HabitDayID");
+
+                    b.ToTable("HabitDays");
+
+                    b.HasData(
+                        new
+                        {
+                            HabitDayID = 1,
+                            DateCreated = new DateTime(2021, 1, 15, 20, 19, 20, 600, DateTimeKind.Local).AddTicks(9409)
+                        });
+                });
+
+            modelBuilder.Entity("PersonalWebTool_V1.Models.HabitQuantity", b =>
+                {
+                    b.Property<string>("HabitQuantityID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Counter")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HabitDayID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HabitID")
+                        .HasColumnType("int");
+
+                    b.HasKey("HabitQuantityID");
+
+                    b.HasIndex("HabitDayID");
+
+                    b.HasIndex("HabitID");
+
+                    b.ToTable("HabitQuantities");
                 });
 
             modelBuilder.Entity("PersonalWebTool_V1.Models.PostCategory", b =>
@@ -186,9 +264,31 @@ namespace PersonalWebTool_V1.Migrations
                     b.Navigation("GratefulnessEntry");
                 });
 
+            modelBuilder.Entity("PersonalWebTool_V1.Models.HabitQuantity", b =>
+                {
+                    b.HasOne("PersonalWebTool_V1.Models.HabitDay", "HabitDay")
+                        .WithMany("HabitQuantities")
+                        .HasForeignKey("HabitDayID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PersonalWebTool_V1.Models.Habit", "Habit")
+                        .WithMany()
+                        .HasForeignKey("HabitID");
+
+                    b.Navigation("Habit");
+
+                    b.Navigation("HabitDay");
+                });
+
             modelBuilder.Entity("PersonalWebTool_V1.Models.GratefulnessEntry", b =>
                 {
                     b.Navigation("GratefulnessUnits");
+                });
+
+            modelBuilder.Entity("PersonalWebTool_V1.Models.HabitDay", b =>
+                {
+                    b.Navigation("HabitQuantities");
                 });
 #pragma warning restore 612, 618
         }

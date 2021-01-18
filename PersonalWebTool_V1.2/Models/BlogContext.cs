@@ -84,6 +84,14 @@ namespace PersonalWebTool_V1.Models
                     GratefulnessEntryID = 1
                 });
 
+            modelBuilder.Entity<HabitDay>().HasData(
+
+                new HabitDay
+                {
+                    HabitDayID = 1,
+
+                });
+
 
 
 

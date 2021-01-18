@@ -5,7 +5,7 @@
 
 <h1>@ViewBag.Title</h1>
 <div class="row">
-    <div class="col-sm-2">
+    <div class="col-lg-4">
         <div class="list-group">
 
             <a asp-controller="BlogPost" asp-action="List" asp-route-id="All"
@@ -20,8 +20,9 @@
         </div>
     </div>
 
-    <div class="col-md-10">
+    <div class="col-lg-8">
         <a asp-controller="BlogPost" asp-action="Add" class="btn btn-primary">Add new post</a>
+
         @foreach (BlogPost post in Model.BlogPosts)
         {
             <div style="height:250px;margin-bottom:30px;">
@@ -29,9 +30,9 @@
                 <div style="height:80%">
                     <img src="@(post.ImageUrl)" alt="@post.ImageName" style="float:left;height:100%;margin-right:20px;" />
                     <h5>@post.DateCreated</h5>
+                    <h6>@post.Category.Name</h6>
                     <article style="font-size:20px;overflow:hidden;height:79%"><p>@post.Body</p></article>
-                    <a class="float-right" asp-controller="BlogPost" asp-action="Update" asp-route-ID="@post.BlogPostID">Read More</a>
-                    <a asp-controller="BlogPost" asp-action="AddImageWindow" asp-route-ID="@post.BlogPostID" class="btn btn-primary">Add Image</a>
+                    <a class="float-right" asp-controller="BlogPost" asp-action="Update" asp-route-ID="@post.BlogPostID">Edit</a>
                 </div>
             </div>
         }

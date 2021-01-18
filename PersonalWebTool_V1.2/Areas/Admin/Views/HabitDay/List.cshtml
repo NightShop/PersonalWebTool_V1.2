@@ -1,5 +1,5 @@
 ﻿@model HabitViewModel
-@(ViewBag.Title = "HabitDAYZ");
+@{ViewBag.Title = "HabitDAYZ";}
 
 <h1>@ViewBag.Title</h1>
 <div>
@@ -21,7 +21,7 @@
             {
                 int sumOfPoints = 0;
                 <tr>
-                    <td>@habitDay.DateCreated</td>
+                    <td>@habitDay.DateCreated.ToShortDateString()</td>
                     @foreach (HabitQuantity quantity in Model.HabitQuantities.Where(q => q.HabitDay == habitDay))
                     {
                         sumOfPoints += quantity.Counter * quantity.Habit.Points;
@@ -34,5 +34,4 @@
             }
         </tbody>
     </table>
-    <a asp-controller="Category" asp-action="Add" class="btn btn-primary">Add New Category</a>
 </div>
