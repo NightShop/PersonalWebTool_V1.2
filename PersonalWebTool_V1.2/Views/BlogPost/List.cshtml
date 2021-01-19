@@ -3,34 +3,47 @@
     ViewBag.Title = "List of Posts";
 }
 
-
-<div class="row">
-    <div class="col-lg-2">
-        <div class="list-group">
-            
-            <a asp-controller="BlogPost" asp-action="List" asp-route-id="All" 
-               class="list-group-item
+<section class="blog-posts pt-4">
+    <div class="row">
+        <aside class="col-md-2">
+            <div class="">
+                <p class="badge-link w-100 text-center">
+                    <a asp-controller="BlogPost" asp-action="List" asp-route-id="All"
+                       class="
                @(Model.SelectedCategory == "All" ? "active" : "")
                ">All</a>
-            @foreach (PostCategory category in Model.Categories)
+                </p>
+
+                @foreach (PostCategory category in Model.Categories)
+                {
+                    <p class="badge-link w-100 text-center">
+                        <a asp-controller="BlogPost" asp-action="List" asp-route-id="@category.Name" class=" @Model.CheckActiveCategory(category.Name) ">@category.Name</a>
+                    </p>
+                }
+            </div>
+        </aside>
+
+        <div class="col-md-10">
+            @foreach (BlogPost post in Model.BlogPosts)
             {
-                <a asp-controller="BlogPost" asp-action="List" asp-route-id="@category.Name" class="list-group-item @Model.CheckActiveCategory(category.Name) ">@category.Name</a>
+                <article class="blog-post">
+                    <div class="row h-100">
+                        <div class="col-md-4 h-100">
+                            <img src="@(post.ImageUrl)" alt="@post.ImageName" class="img-fluid" />
+                        </div>
+                        <div class="col-md-8 h-100" blog-post-info>
+                            <a asp-controller="BlogPost" asp-action="List" asp-route-id="@post.Category.Name" class="badge-post">@post.Category.Name</a>
+                            <h3>@post.Title</h3>
+                            <h6>
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                @post.DateCreated
+                            </h6>
+                            <p>@post.Body</p>
+                            <a class="float-right" asp-controller="BlogPost" asp-action="Detail" asp-route-ID="@post.BlogPostID">Read More</a>
+                        </div>
+                    </div>
+                </article>
             }
         </div>
     </div>
-
-    <div class="col-lg-10">
-        @foreach (BlogPost post in Model.BlogPosts)
-        {
-            <div style="height:250px;margin-bottom:30px;">
-                <h1>@post.Title</h1>
-                <div style="height:80%">
-                    <img src="@(post.ImageUrl)" alt="@post.ImageName" style="float:left;height:100%;margin-right:20px;" />
-                    <h5>@post.DateCreated</h5>
-                    <article style="font-size:20px;overflow:hidden;height:79%"><p>@post.Body</p></article>
-                    <a class="float-right" asp-controller="BlogPost" asp-action="Detail" asp-route-ID="@post.BlogPostID">Read More</a>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+</section>

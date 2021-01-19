@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.Web.BrowserLink;
 
 namespace PersonalWebTool_V1
 {
@@ -37,7 +38,7 @@ namespace PersonalWebTool_V1
                 options => options.UseSqlServer(
                     Configuration.GetConnectionString("BlogContext")));
 
-           
+
 
 
         }
@@ -45,9 +46,12 @@ namespace PersonalWebTool_V1
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseDeveloperExceptionPage();
-            
-           
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+
 
             app.UseStaticFiles();
 
@@ -61,7 +65,7 @@ namespace PersonalWebTool_V1
                 endpoints.MapAreaControllerRoute(
                     name: "admin",
                     areaName: "Admin",
-                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}"); 
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
