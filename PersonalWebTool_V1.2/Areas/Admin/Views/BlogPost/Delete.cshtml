@@ -4,11 +4,11 @@
 }
 
 <h1>Confirm Deletion</h1>
-<h3>Are you sure you want to delete @Model.Title product</h3>
+<h3>Are you sure you want to delete "@Model.Title" post</h3>
 
 <form asp-controller="BlogPost" asp-action="Delete" method="post">
     <input type="hidden" asp-for="BlogPostID" />
 
     <button type="submit" class="btn btn-primary">Delete</button>
-    <a asp-controller="BlogPost" asp-action="List">Cancel</a>
+    <a asp-controller="BlogPost" asp-action="List" class="delete-action">Cancel</a>
 </form>

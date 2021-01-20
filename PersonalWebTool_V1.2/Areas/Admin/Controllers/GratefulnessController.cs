@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PersonalWebTool_V1.Models;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace PersonalWebTool_V1.Areas.Admin.Controllers
 
         public IActionResult List()
         {
-            List<GratefulnessEntry> entries = context.GratefulnessEntries.ToList();
+            List<GratefulnessEntry> entries = context.GratefulnessEntries.Include(entry => entry.GratefulnessUnits).OrderByDescending(entry => entry.DateCreated).ToList();
             return View(entries);
         }
 

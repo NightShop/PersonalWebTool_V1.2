@@ -7,7 +7,12 @@ for details on configuring this project to bundle and minify static web assets.
     #FF652F - orange
     #FFE400 - yellow
     #14A76C - green
+    #a72a14 -
 */
+
+.delete-action {
+    margin-left: 20px;
+}
 
 .blog-post {
     height: auto;
@@ -16,27 +21,67 @@ for details on configuring this project to bundle and minify static web assets.
     border-bottom: 1px solid rgba(20,167,108, 0.5);
 }
 
+.blog-post-title {
+    margin-top: 10px;
+    color: #14A76C;
+}
+
+.blog-post-body {
+    width:100%;
+    height: 30em;
+}
+
+.fa-bars {
+    color: #272727;
+}
+
+.blog-post-date {
+    display: block;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    text-decoration: underline;
+}
+
 a:hover {
     color: #FFE400;
+    text-decoration: none;
 }
 
 .badge-link a {
     display: block;
     color: #272727;
-    background-color: #ff652f;
+    background-color: #ff4a2b;
+    padding: 8px;
+    border-radius: 2px;
+    margin: 15px;
+    font-weight: 700;
+}
+
+
+.badge-link > a.active {
+    display: block;
+    color: #272727;
+    background-color: #a72a14;
     padding: 8px;
     border-radius: 2px;
     margin: 15px;
 }
 
+
 .badge-post {
     float: right;
     color: #272727;
-    background-color: #ff652f;
+    background-color: #ff4a2b;
     padding: 5px;
     border-radius: 2px;
     margin: 4px;
+    font-weight: 700;
 }
+
+    .badge-post:hover {
+        color: #272727;
+        background-color: #a72a14;
+    }
 
 
 body {
@@ -52,7 +97,7 @@ body {
 .nav-link {
     color: #272727;
     font-weight: 600;
-    margin-right:20px;
+    margin-right: 20px;
 }
 
 .blog-post p {
@@ -79,10 +124,18 @@ h1, h2, h3, h4, h5 {
     font-weight: 700;
 }
 
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    color: #747474;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
-    word-break: break-all;
     font-weight: 700;
     font-size: 2rem;
     color: #272727;
@@ -94,12 +147,32 @@ a {
     color: #14a76C;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+body .btn-primary {
+    color: #272727;
+    font-weight: 700;
+    background-color: #FF652F;
+    border-color: #a94421;
 }
 
+.btn-primary:hover {
+    color: #272727;
+    background-color: #a72a14;
+    border-color: #a72a14;
+}
+
+body .btn-primary:active {
+    color: #272727 !important;
+    background-color: #a72a14 !important;
+    border-color: #a72a14 !important;
+    box-shadow: 0 0 0 0.2rem #a72a14!important;
+}
+
+body .btn-primary:focus, body .btn-primary.focus {
+    color: #272727 !important;
+    background-color: #a72a14 !important;
+    border-color: #a72a14 !important;
+    box-shadow: 0 0 0 0.2rem rgba(167, 42, 20, 0.55);
+}
 /*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
@@ -155,9 +228,8 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
-@media only screen and (max-width: 768px) {
+/*@media only screen and (max-width: 768px) {
     .blog-post {
         height: auto;
     }
-
-}
+}*/

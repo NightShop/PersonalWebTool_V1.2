@@ -5,7 +5,7 @@
 
 <section class="blog-posts pt-4">
     <div class="row">
-        <aside class="col-md-2">
+        <aside class="col-md-3">
             <div class="">
                 <p class="badge-link w-100 text-center">
                     <a asp-controller="BlogPost" asp-action="List" asp-route-id="All"
@@ -23,7 +23,7 @@
             </div>
         </aside>
 
-        <div class="col-md-10">
+        <div class="col-md-9">
             @foreach (BlogPost post in Model.BlogPosts)
             {
                 <article class="blog-post">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-md-8 h-100" blog-post-info>
                             <a asp-controller="BlogPost" asp-action="List" asp-route-id="@post.Category.Name" class="badge-post">@post.Category.Name</a>
-                            <h3>@post.Title</h3>
+                            <h3><a asp-controller="BlogPost" asp-action="Detail" asp-route-ID="@post.BlogPostID" class=" blog-post-title">@post.Title</a></h3>
                             <h6>
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                                 @post.DateCreated

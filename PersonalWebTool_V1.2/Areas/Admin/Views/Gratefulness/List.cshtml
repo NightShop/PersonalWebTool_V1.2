@@ -1,6 +1,6 @@
 ﻿@model List<GratefulnessEntry>
 
-@(ViewBag.Title = "Gratefulness Diary");
+@{ViewBag.Title = "Gratefulness Diary";}
 
 <h1>@ViewBag.Title</h1>
 <div>
@@ -23,6 +23,13 @@
                     <td><a asp-controller="Gratefulness" asp-action="Update" asp-route-id="@entry.GratefulnessEntryID">Change</a></td>
                     <td><a asp-controller="Gratefulness" asp-action="Delete" asp-route-id="@entry.GratefulnessEntryID">Delete</a></td>
                 </tr>
+                foreach(GratefulnessUnit unit in entry.GratefulnessUnits)
+                {
+                    <tr>
+                        <td>@unit.Main</td>
+                        <td>@unit.Details</td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
