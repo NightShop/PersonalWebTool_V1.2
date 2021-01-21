@@ -16,7 +16,7 @@
 
             </tr>
         </thead>
-        <tbody>
+        <tbody class="habit-table">
             @foreach (HabitDay habitDay in Model.HabitDays)
             {
                 int sumOfPoints = 0;
@@ -26,9 +26,21 @@
                     {
                         sumOfPoints += quantity.Counter * quantity.Habit.Points;
                         string id = quantity.Habit.HabitID + "-" + habitDay.HabitDayID;
-                        <td>@quantity.Counter <a asp-controller="HabitDay" asp-action="AddPoint" asp-route-id="@id">Add count</a></td>
+                        <td>
+                            <h5 class="quantity-counter">
+                                @quantity.Counter
+                            </h5>
+                            <div class="point-buttons">
+                                <a class="plus-point" asp-controller="HabitDay" asp-action="AddPoint" asp-route-id="@id">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                </a>
+                                <a class="minus-point" asp-controller="HabitDay" asp-action="DeletePoint" asp-route-id="@id">
+                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </td>
                     }
-                    <td>@sumOfPoints Points</td>
+                    <td class="sum-of-points">@sumOfPoints Points</td>
 
                 </tr>
             }

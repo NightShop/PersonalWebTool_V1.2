@@ -5,33 +5,25 @@
 <h1>@ViewBag.Title</h1>
 <div>
     <a asp-controller="Gratefulness" asp-action="Add">Add new entry</a>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Date Created</th>
-                <th>ID</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (GratefulnessEntry entry in Model)
-            {
-                <tr>
-                    <td>@entry.DateCreated</td>
-                    <td>@entry.GratefulnessEntryID</td>
-                    <td><a asp-controller="Gratefulness" asp-action="Update" asp-route-id="@entry.GratefulnessEntryID">Change</a></td>
-                    <td><a asp-controller="Gratefulness" asp-action="Delete" asp-route-id="@entry.GratefulnessEntryID">Delete</a></td>
-                </tr>
-                foreach(GratefulnessUnit unit in entry.GratefulnessUnits)
+
+    @foreach (GratefulnessEntry entry in Model)
+    {
+        <div class="grat-entry">
+            <h3 class="grat-date">
+                @entry.DateCreated.ToShortDateString()
+            </h3>
+            <div><a asp-controller="Gratefulness" asp-action="Update" asp-route-id="@entry.GratefulnessEntryID" class="grat-button">Change</a></div>
+            <div><a asp-controller="Gratefulness" asp-action="Delete" asp-route-id="@entry.GratefulnessEntryID" class="grat-button">Delete</a></div>
+            <div class="grat-units">
+                @foreach (GratefulnessUnit unit in entry.GratefulnessUnits)
                 {
-                    <tr>
-                        <td>@unit.Main</td>
-                        <td>@unit.Details</td>
-                    </tr>
+                    <div class="grat-unit">
+                        <h5 class="grat-main">@unit.Main</h5>
+                        <div class="grat-details">@unit.Details</div>
+                    </div>
                 }
-            }
-        </tbody>
-    </table>
+            </div>
+        </div>
+    }
 </div>
 

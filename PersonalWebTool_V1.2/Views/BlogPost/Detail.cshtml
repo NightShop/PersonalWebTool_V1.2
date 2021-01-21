@@ -4,7 +4,7 @@
 }
 <img src="@(Model.ImageUrl)" alt="@Model.ImageName" style="width:100%;margin-bottom:20px;margin-top:20px;" />
 <h1 class="blog-post-title">@ViewBag.Title</h1>
-<time class="blog-post-date">@Model.DateCreated</time>
+<time class="blog-post-date"><i class="fa fa-calendar" aria-hidden="true"></i> @Model.DateCreated</time>
 <article style="font-size:20px;"><p>@Model.Body</p></article>
 <a asp-controller="BlogPost" asp-action="List">Back</a>
 

@@ -6,7 +6,7 @@
 
 <h1>@ViewBag.Title</h1>
 
-<form enctype="multipart/form-data" asp-controller="BlogPost" asp-action="Update" method="post">
+<form autocomplete="off" enctype="multipart/form-data" asp-controller="BlogPost" asp-action="Update" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input type="hidden" asp-for="blogPost.BlogPostID" />
     <input type="hidden" asp-for="blogPost.ImageUrl" />
@@ -35,7 +35,7 @@
     <div class="form-group">
         <label asp-for="blogPost.Body">Body:</label>
         <br />
-        <textarea rows="20" placeholder="What is on your mind?" class="blog-post-body" rows="15" asp-for="blogPost.Body" ></textarea>
+        <textarea rows="20" placeholder="What is on your mind?" class="blog-post-body" asp-for="blogPost.Body" ></textarea>
     </div>
     <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
     <a asp-controller="BlogPost" asp-action="List" class="btn btn-primary">Cancel</a>

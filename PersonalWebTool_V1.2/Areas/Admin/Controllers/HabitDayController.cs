@@ -104,5 +104,17 @@ namespace PersonalWebTool_V1.Areas.Admin.Controllers
             return RedirectToAction("List");
 
         }
+
+        public IActionResult DeletePoint(string id)
+        {
+            string[] slug = id.Split("-");
+            string habitID = slug[0];
+            string habitDayID = slug[1];
+            HabitQuantity habitQuantity = context.HabitQuantities.Where(q => q.Habit.HabitID.ToString() == habitID && q.HabitDay.HabitDayID.ToString() == habitDayID).FirstOrDefault();
+            habitQuantity.Counter--;
+            context.HabitQuantities.Update(habitQuantity);
+            context.SaveChanges();
+            return RedirectToAction("List");
+        }
     }
 }
